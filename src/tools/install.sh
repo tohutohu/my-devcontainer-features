@@ -2,7 +2,6 @@
 set -e
 
 echo "Activating feature 'Development Tools'"
-set -x  # Enable debug mode
 
 # Options
 INSTALL_RG=${INSTALLRG:-true}
@@ -31,7 +30,7 @@ check_packages() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install common dependencies
-check_packages curl ca-certificates
+check_packages curl ca-certificates jq unzip
 
 # Get architecture
 architecture="$(dpkg --print-architecture)"
@@ -50,17 +49,15 @@ if [ "${INSTALL_RG}" = "true" ]; then
     
     if [ "${INSTALL_RG}" = "true" ]; then
         if [ "${RG_VERSION}" = "latest" ]; then
-            rg_download_url="https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep-${rg_arch}-unknown-linux-musl.tar.gz"
-        else
-            rg_download_url="https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-${rg_arch}-unknown-linux-musl.tar.gz"
+            RG_VERSION=$(curl -s https://api.github.com/repos/BurntSushi/ripgrep/releases/latest | jq -r '.tag_name')
+            echo "Latest ripgrep version: ${RG_VERSION}"
         fi
         
+        rg_download_url="https://github.com/BurntSushi/ripgrep/releases/download/${RG_VERSION}/ripgrep-${RG_VERSION}-${rg_arch}-unknown-linux-musl.tar.gz"
+        
+        echo "Downloading from: ${rg_download_url}"
         curl -sL "${rg_download_url}" | tar xz -C /tmp
-        if [ "${RG_VERSION}" = "latest" ]; then
-            mv /tmp/ripgrep-*/rg /usr/local/bin/
-        else
-            mv /tmp/ripgrep-${RG_VERSION}-${rg_arch}-unknown-linux-musl/rg /usr/local/bin/
-        fi
+        mv /tmp/ripgrep-${RG_VERSION}-${rg_arch}-unknown-linux-musl/rg /usr/local/bin/
         chmod +x /usr/local/bin/rg
         
         echo "ripgrep has been installed!"
@@ -81,13 +78,17 @@ if [ "${INSTALL_AST_GREP}" = "true" ]; then
     
     if [ "${INSTALL_AST_GREP}" = "true" ]; then
         if [ "${AST_GREP_VERSION}" = "latest" ]; then
-            ast_download_url="https://github.com/ast-grep/ast-grep/releases/latest/download/sg-${ast_arch}-unknown-linux-gnu.tar.gz"
-        else
-            ast_download_url="https://github.com/ast-grep/ast-grep/releases/download/${AST_GREP_VERSION}/sg-${ast_arch}-unknown-linux-gnu.tar.gz"
+            AST_GREP_VERSION=$(curl -s https://api.github.com/repos/ast-grep/ast-grep/releases/latest | jq -r '.tag_name')
+            echo "Latest ast-grep version: ${AST_GREP_VERSION}"
         fi
         
-        curl -sL "${ast_download_url}" | tar xz -C /tmp
-        mv /tmp/sg /usr/local/bin/ast-grep
+        ast_download_url="https://github.com/ast-grep/ast-grep/releases/download/${AST_GREP_VERSION}/app-${ast_arch}-unknown-linux-gnu.zip"
+        
+        echo "Downloading from: ${ast_download_url}"
+        curl -sL "${ast_download_url}" -o /tmp/ast-grep.zip
+        unzip -q /tmp/ast-grep.zip -d /tmp/ast-grep
+        mv /tmp/ast-grep/sg /usr/local/bin/ast-grep
+        rm -rf /tmp/ast-grep.zip /tmp/ast-grep
         chmod +x /usr/local/bin/ast-grep
         
         # Create sg symlink for convenience
@@ -126,5 +127,4 @@ if [ "${INSTALL_SEMGREP}" = "true" ]; then
     semgrep --version
 fi
 
-set +x  # Disable debug mode
 echo "Development tools installation completed!"
