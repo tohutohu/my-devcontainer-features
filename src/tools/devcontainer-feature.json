@@ -1,0 +1,58 @@
+{
+    "name": "Development Tools (rg, ast-grep, semgrep)",
+    "id": "tools",
+    "version": "1.0.0",
+    "description": "Collection of development tools: ripgrep (rg), ast-grep, and semgrep",
+    "documentationURL": "https://github.com/to-hutohu/devcontainer-features",
+    "options": {
+        "installRg": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install ripgrep (rg) - a blazing fast search tool"
+        },
+        "rgVersion": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "14.1.0",
+                "13.0.0"
+            ],
+            "default": "latest",
+            "description": "Version of ripgrep to install"
+        },
+        "installAstGrep": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install ast-grep - a fast and polyglot tool for code structural search"
+        },
+        "astGrepVersion": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "0.12.0",
+                "0.11.0"
+            ],
+            "default": "latest",
+            "description": "Version of ast-grep to install"
+        },
+        "installSemgrep": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install semgrep - static analysis tool for finding bugs and security vulnerabilities"
+        },
+        "semgrepVersion": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "1.45.0",
+                "1.44.0"
+            ],
+            "default": "latest",
+            "description": "Version of semgrep to install"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils",
+        "ghcr.io/devcontainers/features/python"
+    ]
+}
