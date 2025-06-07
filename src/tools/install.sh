@@ -10,6 +10,8 @@ INSTALL_AST_GREP=${INSTALLASTGREP:-true}
 AST_GREP_VERSION=${ASTGREPVERSION:-latest}
 INSTALL_SEMGREP=${INSTALLSEMGREP:-true}
 SEMGREP_VERSION=${SEMGREPVERSION:-latest}
+INSTALL_DENO=${INSTALLDENO:-true}
+DENO_VERSION=${DENOVERSION:-latest}
 
 # Common functions
 apt_get_update()
@@ -125,6 +127,28 @@ if [ "${INSTALL_SEMGREP}" = "true" ]; then
     
     echo "semgrep has been installed!"
     semgrep --version
+fi
+
+# Install Deno
+if [ "${INSTALL_DENO}" = "true" ]; then
+    echo "Installing Deno ${DENO_VERSION}..."
+    
+    # Deno installation script
+    if [ "${DENO_VERSION}" = "latest" ]; then
+        curl -fsSL https://deno.land/install.sh | sh
+    else
+        curl -fsSL https://deno.land/install.sh | sh -s v${DENO_VERSION}
+    fi
+    
+    # Add Deno to PATH
+    echo 'export DENO_INSTALL="/root/.deno"' >> /etc/profile
+    echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> /etc/profile
+    
+    # Create symlink for immediate availability
+    ln -sf /root/.deno/bin/deno /usr/local/bin/deno
+    
+    echo "Deno has been installed!"
+    deno --version
 fi
 
 echo "Development tools installation completed!"

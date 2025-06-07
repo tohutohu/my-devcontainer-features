@@ -1,6 +1,6 @@
-# Development Tools (rg, ast-grep, semgrep)
+# Development Tools (rg, ast-grep, semgrep, deno)
 
-Collection of development tools: ripgrep (rg), ast-grep, and semgrep.
+Collection of development tools: ripgrep (rg), ast-grep, semgrep, and deno.
 
 ## Example Usage
 
@@ -20,6 +20,8 @@ Collection of development tools: ripgrep (rg), ast-grep, and semgrep.
 | astGrepVersion | Version of ast-grep to install | string | latest |
 | installSemgrep | Install semgrep - static analysis tool for finding bugs and security vulnerabilities | boolean | true |
 | semgrepVersion | Version of semgrep to install | string | latest |
+| installDeno | Install Deno - a secure runtime for JavaScript and TypeScript | boolean | true |
+| denoVersion | Version of Deno to install | string | latest |
 
 ## Installed Tools
 
@@ -32,6 +34,9 @@ A fast and polyglot tool for code structural search, lint and rewriting. Both `a
 ### semgrep
 Static analysis tool for finding bugs, code smells, and security vulnerabilities.
 
+### Deno
+A secure runtime for JavaScript and TypeScript with native TypeScript support and built-in tooling.
+
 ## Customization Examples
 
 Install only specific tools:
@@ -40,7 +45,8 @@ Install only specific tools:
     "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
         "installRg": true,
         "installAstGrep": false,
-        "installSemgrep": true
+        "installSemgrep": true,
+        "installDeno": true
     }
 }
 ```
@@ -51,7 +57,8 @@ Install specific versions:
     "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
         "rgVersion": "14.1.0",
         "astGrepVersion": "0.12.0",
-        "semgrepVersion": "1.45.0"
+        "semgrepVersion": "1.45.0",
+        "denoVersion": "1.40.0"
     }
 }
 ```

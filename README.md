@@ -6,7 +6,7 @@
 
 ### `tools` - 開発ツールコレクション
 
-ripgrep (rg)、ast-grep、semgrep の3つの開発ツールをまとめてインストールする Feature です。
+ripgrep (rg)、ast-grep、semgrep、Deno の4つの開発ツールをまとめてインストールする Feature です。
 
 #### 使用例
 
@@ -29,6 +29,8 @@ ripgrep (rg)、ast-grep、semgrep の3つの開発ツールをまとめてイン
 | astGrepVersion | ast-grep のバージョン | string | latest |
 | installSemgrep | semgrep をインストール | boolean | true |
 | semgrepVersion | semgrep のバージョン | string | latest |
+| installDeno | Deno をインストール | boolean | true |
+| denoVersion | Deno のバージョン | string | latest |
 
 #### カスタマイズ例
 
@@ -39,7 +41,8 @@ ripgrep (rg)、ast-grep、semgrep の3つの開発ツールをまとめてイン
         "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
             "installRg": true,
             "installAstGrep": false,
-            "installSemgrep": true
+            "installSemgrep": true,
+            "installDeno": true
         }
     }
 }
@@ -52,35 +55,8 @@ ripgrep (rg)、ast-grep、semgrep の3つの開発ツールをまとめてイン
         "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
             "rgVersion": "14.1.0",
             "astGrepVersion": "0.12.0",
-            "semgrepVersion": "1.45.0"
-        }
-    }
-}
-```
-
-### `hello`
-
-挨拶メッセージを表示するサンプル Feature です。
-
-```jsonc
-{
-    "features": {
-        "ghcr.io/to-hutohu/devcontainer-features/hello:1": {
-            "greeting": "Hello"
-        }
-    }
-}
-```
-
-### `color`
-
-お気に入りの色を表示するサンプル Feature です。
-
-```jsonc
-{
-    "features": {
-        "ghcr.io/to-hutohu/devcontainer-features/color:1": {
-            "favorite": "green"
+            "semgrepVersion": "1.45.0",
+            "denoVersion": "1.40.0"
         }
     }
 }
@@ -97,20 +73,17 @@ ripgrep (rg)、ast-grep、semgrep の3つの開発ツールをまとめてイン
 ### semgrep
 バグ、コードの匂い、セキュリティ脆弱性を見つけるための静的解析ツール。
 
+### Deno
+JavaScriptとTypeScriptのためのセキュアなランタイム。Node.jsと互換性があり、TypeScriptをネイティブにサポートしています。
+
 ## リポジトリ構造
 
 ```
 ├── src
-│   ├── tools
-│   │   ├── devcontainer-feature.json
-│   │   ├── install.sh
-│   │   └── README.md
-│   ├── hello
-│   │   ├── devcontainer-feature.json
-│   │   └── install.sh
-│   └── color
+│   └── tools
 │       ├── devcontainer-feature.json
-│       └── install.sh
+│       ├── install.sh
+│       └── README.md
 └── test
     └── ...
 ```
