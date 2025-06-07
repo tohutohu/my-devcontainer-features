@@ -2,6 +2,7 @@
 set -e
 
 echo "Activating feature 'Development Tools'"
+set -x  # Enable debug mode
 
 # Options
 INSTALL_RG=${INSTALLRG:-true}
@@ -14,7 +15,7 @@ SEMGREP_VERSION=${SEMGREPVERSION:-latest}
 # Common functions
 apt_get_update()
 {
-    if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
+    if [ -z "$(find /var/lib/apt/lists -mindepth 1 -maxdepth 1 2>/dev/null)" ]; then
         echo "Running apt-get update..."
         apt-get update -y
     fi
@@ -102,12 +103,14 @@ if [ "${INSTALL_SEMGREP}" = "true" ]; then
     echo "Installing semgrep ${SEMGREP_VERSION}..."
     
     # Install python3 and pip if not already installed
+    echo "Installing Python dependencies..."
     check_packages python3 python3-pip python3-venv
     
     # Create a virtual environment for semgrep to avoid conflicts
     python3 -m venv /opt/semgrep-env
     
     # Activate virtual environment and install semgrep
+    echo "Installing semgrep in virtual environment..."
     if [ "${SEMGREP_VERSION}" = "latest" ]; then
         /opt/semgrep-env/bin/pip install --upgrade pip
         /opt/semgrep-env/bin/pip install semgrep
@@ -123,4 +126,5 @@ if [ "${INSTALL_SEMGREP}" = "true" ]; then
     semgrep --version
 fi
 
+set +x  # Disable debug mode
 echo "Development tools installation completed!"
