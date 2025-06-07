@@ -1,0 +1,28 @@
+{
+    "default": {
+        "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+        "features": {
+            "tools": {}
+        }
+    },
+    "only_rg": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "tools": {
+                "installRg": true,
+                "installAstGrep": false,
+                "installSemgrep": false
+            }
+        }
+    },
+    "specific_versions": {
+        "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+        "features": {
+            "tools": {
+                "rgVersion": "14.1.0",
+                "astGrepVersion": "0.12.0",
+                "semgrepVersion": "1.45.0"
+            }
+        }
+    }
+}

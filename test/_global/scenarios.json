@@ -9,5 +9,11 @@
                 "greeting": "Greetings"
             }
         }
+    },
+    "all_tools": {
+        "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+        "features": {
+            "tools": {}
+        }
     }
 }
