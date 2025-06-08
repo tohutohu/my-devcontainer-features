@@ -30,7 +30,7 @@ check_packages() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install common dependencies
-check_packages curl ca-certificates
+check_packages curl ca-certificates jq unzip
 
 # Install ripgrep (rg) via apt
 if [ "${INSTALL_RG}" = "true" ]; then
@@ -41,28 +41,40 @@ if [ "${INSTALL_RG}" = "true" ]; then
     rg --version
 fi
 
-# Install ast-grep via npm
+# Install ast-grep
 if [ "${INSTALL_AST_GREP}" = "true" ]; then
     echo "Installing ast-grep ${AST_GREP_VERSION}..."
     
-    # Install Node.js if not already installed
-    if ! command -v npm >/dev/null 2>&1; then
-        echo "Installing Node.js..."
-        check_packages nodejs npm
+    # Get architecture
+    architecture="$(dpkg --print-architecture)"
+    case "${architecture}" in
+        amd64) ast_arch="x86_64" ;;
+        arm64) ast_arch="aarch64" ;;
+        armhf) ast_arch="armv7" ;;
+        *) echo "Unsupported architecture for ast-grep: ${architecture}" && INSTALL_AST_GREP="false" ;;
+    esac
+    
+    if [ "${INSTALL_AST_GREP}" = "true" ]; then
+        if [ "${AST_GREP_VERSION}" = "latest" ]; then
+            AST_GREP_VERSION=$(curl -s https://api.github.com/repos/ast-grep/ast-grep/releases/latest | jq -r '.tag_name')
+            echo "Latest ast-grep version: ${AST_GREP_VERSION}"
+        fi
+        
+        ast_download_url="https://github.com/ast-grep/ast-grep/releases/download/${AST_GREP_VERSION}/app-${ast_arch}-unknown-linux-gnu.zip"
+        
+        echo "Downloading from: ${ast_download_url}"
+        curl -sL "${ast_download_url}" -o /tmp/ast-grep.zip
+        unzip -q /tmp/ast-grep.zip -d /tmp/ast-grep
+        mv /tmp/ast-grep/sg /usr/local/bin/ast-grep
+        rm -rf /tmp/ast-grep.zip /tmp/ast-grep
+        chmod +x /usr/local/bin/ast-grep
+        
+        # Create sg symlink for convenience
+        ln -sf /usr/local/bin/ast-grep /usr/local/bin/sg
+        
+        echo "ast-grep has been installed!"
+        ast-grep --version
     fi
-    
-    # Install ast-grep globally via npm
-    if [ "${AST_GREP_VERSION}" = "latest" ]; then
-        npm install -g @ast-grep/cli
-    else
-        npm install -g @ast-grep/cli@${AST_GREP_VERSION}
-    fi
-    
-    # Create sg symlink for convenience
-    ln -sf /usr/local/bin/ast-grep /usr/local/bin/sg
-    
-    echo "ast-grep has been installed!"
-    ast-grep --version
 fi
 
 # Install semgrep via pip
