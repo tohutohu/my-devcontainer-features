@@ -1,6 +1,6 @@
-# Development Tools (rg, ast-grep, semgrep, deno)
+# Development Tools (rg, ast-grep, semgrep)
 
-Collection of development tools: ripgrep (rg), ast-grep, semgrep, and deno.
+Collection of development tools: ripgrep (rg), ast-grep, and semgrep.
 
 ## Example Usage
 
@@ -15,13 +15,11 @@ Collection of development tools: ripgrep (rg), ast-grep, semgrep, and deno.
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | installRg | Install ripgrep (rg) - a blazing fast search tool | boolean | true |
-| rgVersion | Version of ripgrep to install | string | latest |
+| rgVersion | Version of ripgrep to install (Note: apt version may be older than latest) | string | latest |
 | installAstGrep | Install ast-grep - a fast and polyglot tool for code structural search | boolean | true |
 | astGrepVersion | Version of ast-grep to install | string | latest |
 | installSemgrep | Install semgrep - static analysis tool for finding bugs and security vulnerabilities | boolean | true |
 | semgrepVersion | Version of semgrep to install | string | latest |
-| installDeno | Install Deno - a secure runtime for JavaScript and TypeScript | boolean | true |
-| denoVersion | Version of Deno to install | string | latest |
 
 ## Installed Tools
 
@@ -34,9 +32,6 @@ A fast and polyglot tool for code structural search, lint and rewriting. Both `a
 ### semgrep
 Static analysis tool for finding bugs, code smells, and security vulnerabilities.
 
-### Deno
-A secure runtime for JavaScript and TypeScript with native TypeScript support and built-in tooling.
-
 ## Customization Examples
 
 Install only specific tools:
@@ -45,8 +40,7 @@ Install only specific tools:
     "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
         "installRg": true,
         "installAstGrep": false,
-        "installSemgrep": true,
-        "installDeno": true
+        "installSemgrep": true
     }
 }
 ```
@@ -55,10 +49,9 @@ Install specific versions:
 ```json
 "features": {
     "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
-        "rgVersion": "14.1.0",
+        "rgVersion": "latest",
         "astGrepVersion": "0.12.0",
-        "semgrepVersion": "1.45.0",
-        "denoVersion": "1.40.0"
+        "semgrepVersion": "1.45.0"
     }
 }
 ```
