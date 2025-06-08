@@ -6,7 +6,7 @@
 
 ### `tools` - 開発ツールコレクション
 
-ripgrep (rg)、ast-grep、semgrep、Deno の4つの開発ツールをまとめてインストールする Feature です。
+ripgrep (rg)、ast-grep、semgrep の3つの開発ツールをまとめてインストールする Feature です。
 
 #### 使用例
 
@@ -29,8 +29,6 @@ ripgrep (rg)、ast-grep、semgrep、Deno の4つの開発ツールをまとめ�
 | astGrepVersion | ast-grep のバージョン | string | latest |
 | installSemgrep | semgrep をインストール | boolean | true |
 | semgrepVersion | semgrep のバージョン | string | latest |
-| installDeno | Deno をインストール | boolean | true |
-| denoVersion | Deno のバージョン | string | latest |
 
 #### カスタマイズ例
 
@@ -41,8 +39,7 @@ ripgrep (rg)、ast-grep、semgrep、Deno の4つの開発ツールをまとめ�
         "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
             "installRg": true,
             "installAstGrep": false,
-            "installSemgrep": true,
-            "installDeno": true
+            "installSemgrep": true
         }
     }
 }
@@ -53,10 +50,9 @@ ripgrep (rg)、ast-grep、semgrep、Deno の4つの開発ツールをまとめ�
 {
     "features": {
         "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
-            "rgVersion": "14.1.0",
+            "rgVersion": "latest",
             "astGrepVersion": "0.12.0",
-            "semgrepVersion": "1.45.0",
-            "denoVersion": "1.40.0"
+            "semgrepVersion": "1.45.0"
         }
     }
 }
@@ -72,9 +68,6 @@ ripgrep (rg)、ast-grep、semgrep、Deno の4つの開発ツールをまとめ�
 
 ### semgrep
 バグ、コードの匂い、セキュリティ脆弱性を見つけるための静的解析ツール。
-
-### Deno
-JavaScriptとTypeScriptのためのセキュアなランタイム。Node.jsと互換性があり、TypeScriptをネイティブにサポートしています。
 
 ## リポジトリ構造
 
