@@ -1,7 +1,7 @@
 {
     "name": "Development Tools (rg, ast-grep, semgrep)",
     "id": "tools",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Collection of development tools: ripgrep (rg), ast-grep, and semgrep",
     "documentationURL": "https://github.com/to-hutohu/devcontainer-features",
     "options": {
