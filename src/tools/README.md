@@ -6,7 +6,7 @@ Collection of development tools: ripgrep (rg), ast-grep, and semgrep.
 
 ```json
 "features": {
-    "ghcr.io/to-hutohu/devcontainer-features/tools:1": {}
+    "ghcr.io/tohutohu/my-devcontainer-features/tools:1": {}
 }
 ```
 
@@ -21,16 +21,6 @@ Collection of development tools: ripgrep (rg), ast-grep, and semgrep.
 | installSemgrep | Install semgrep - static analysis tool for finding bugs and security vulnerabilities | boolean | true |
 | semgrepVersion | Version of semgrep to install | string | latest |
 
-## Installed Tools
-
-### ripgrep (rg)
-A blazing fast search tool that recursively searches directories for a regex pattern.
-
-### ast-grep
-A fast and polyglot tool for code structural search, lint and rewriting. Both `ast-grep` and `sg` commands will be available.
-
-### semgrep
-Static analysis tool for finding bugs, code smells, and security vulnerabilities.
 
 ## Customization Examples
 
@@ -58,4 +48,4 @@ Install specific versions:
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/to-hutohu/devcontainer-features/blob/main/src/tools/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/tohutohu/my-devcontainer-features/blob/main/src/tools/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
