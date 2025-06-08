@@ -14,4 +14,7 @@ check "ast-grepのバージョン確認" bash -c "ast-grep --version"
 check "semgrepがインストールされている" bash -c "which semgrep"
 check "semgrepのバージョン確認" bash -c "semgrep --version"
 
+check "Denoがインストールされている" bash -c "which deno"
+check "Denoのバージョン確認" bash -c "deno --version"
+
 reportResults

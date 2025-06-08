@@ -1,15 +1,4 @@
 {
-    "color_and_hello": {
-        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-        "features": {
-            "color": {
-                "favorite": "purple"
-            },
-            "hello": {
-                "greeting": "Greetings"
-            }
-        }
-    },
     "all_tools": {
         "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
         "features": {

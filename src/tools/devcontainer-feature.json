@@ -1,8 +1,8 @@
 {
-    "name": "Development Tools (rg, ast-grep, semgrep)",
+    "name": "Development Tools (rg, ast-grep, semgrep, deno)",
     "id": "tools",
     "version": "1.0.0",
-    "description": "Collection of development tools: ripgrep (rg), ast-grep, and semgrep",
+    "description": "Collection of development tools: ripgrep (rg), ast-grep, semgrep, and deno",
     "documentationURL": "https://github.com/to-hutohu/devcontainer-features",
     "options": {
         "installRg": {
@@ -49,6 +49,21 @@
             ],
             "default": "latest",
             "description": "Version of semgrep to install"
+        },
+        "installDeno": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install Deno - a secure runtime for JavaScript and TypeScript"
+        },
+        "denoVersion": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "1.40.0",
+                "1.39.0"
+            ],
+            "default": "latest",
+            "description": "Version of Deno to install"
         }
     },
     "installsAfter": [
