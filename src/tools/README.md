@@ -1,6 +1,7 @@
-# Development Tools (rg, ast-grep, semgrep)
 
-Collection of development tools: ripgrep (rg), ast-grep, and semgrep.
+# Development Tools (rg, ast-grep, semgrep) (tools)
+
+Collection of development tools: ripgrep (rg), ast-grep, and semgrep
 
 ## Example Usage
 
@@ -22,29 +23,6 @@ Collection of development tools: ripgrep (rg), ast-grep, and semgrep.
 | semgrepVersion | Version of semgrep to install | string | latest |
 
 
-## Customization Examples
-
-Install only specific tools:
-```json
-"features": {
-    "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
-        "installRg": true,
-        "installAstGrep": false,
-        "installSemgrep": true
-    }
-}
-```
-
-Install specific versions:
-```json
-"features": {
-    "ghcr.io/to-hutohu/devcontainer-features/tools:1": {
-        "rgVersion": "latest",
-        "astGrepVersion": "0.12.0",
-        "semgrepVersion": "1.45.0"
-    }
-}
-```
 
 ---
 
